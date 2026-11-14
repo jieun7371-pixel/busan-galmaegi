@@ -7,149 +7,208 @@
 <meta name="description" content="바이브코딩으로 만든 게임 모음. 하고 싶은 게임을 골라 바로 시작해 보세요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f7fb;
-    --surface: #ffffff;
-    --ink: #16233b;
-    --muted: #5d6b82;
-    --line: #dde3ee;
-    --accent: #2563eb;
-    --accent-ink: #ffffff;
-    --sky-a: #bfdbfe;
-    --sky-b: #eff6ff;
-    --bld: #8aa0c4;
-    --bld-dark: #6b83ab;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1624;
-      --surface: #182236;
-      --ink: #eef2fa;
-      --muted: #9aa8c2;
-      --line: #28344d;
-      --accent: #5b8def;
-      --accent-ink: #0b1220;
-      --sky-a: #27406f;
-      --sky-b: #1b2c4d;
-      --bld: #3d5584;
-      --bld-dark: #314672;
-    }
+    --ink: #22314f;
+    --sky: #cfe7ff;
+    --sky-soft: #f1f9ff;
+    --sun: #ffd466;
+    --pink: #ffb3c1;
+    --mint: #c9f0e0;
+    --peach: #ffe6d2;
+    --lilac: #dcd3ff;
+    --muted: #4d5c7a;
   }
   * { box-sizing: border-box; }
-  html { scroll-padding-top: 16px; }
   body {
     margin: 0;
-    background: var(--bg);
     color: var(--ink);
     font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-    line-height: 1.6;
+    line-height: 1.65;
+    background: linear-gradient(180deg, var(--sky) 0%, var(--sky-soft) 520px, #fff 100%) no-repeat;
+    min-height: 100vh;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 56px 24px 72px; }
-  header { margin-bottom: 40px; }
-  h1 {
-    margin: 0 0 12px;
-    font-size: clamp(1.9rem, 5vw, 3rem);
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-  header p { margin: 0; color: var(--muted); font-size: 1.05rem; max-width: 34em; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 40px 22px 64px; }
+  h1, h2, h3, .btn { font-family: "Jua", "Noto Sans KR", sans-serif; font-weight: 400; }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-  }
+  /* 상단 소개 */
+  .hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+  .hero h1 { margin: 0 0 12px; font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .hero h1 small { display: block; font-size: .6em; margin-top: 4px; }
+  .hero p { margin: 0; max-width: 24em; color: var(--muted); font-size: 1.05rem; }
+  .hero-art { flex: 0 0 auto; width: min(300px, 38vw); }
+  .hero-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .bird { animation: float 4s ease-in-out infinite; transform-origin: 50% 50%; }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+
+  /* 게임 카드 */
   .card {
-    display: flex;
-    flex-direction: column;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.3fr;
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: 0 8px 0 var(--ink);
     overflow: hidden;
-    color: inherit;
-    text-decoration: none;
+    margin-bottom: 36px;
   }
-  a.card { transition: border-color .15s, transform .15s; }
-  a.card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  a.card:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-
-  .thumb { height: 150px; background: linear-gradient(var(--sky-a), var(--sky-b)); }
+  .thumb { background: linear-gradient(var(--sky), #eaf5ff); border-right: 3px solid var(--ink); min-height: 260px; }
   .thumb svg { display: block; width: 100%; height: 100%; }
-
-  .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .body h2 { margin: 0; font-size: 1.25rem; font-weight: 700; }
-  .body p { margin: 0; color: var(--muted); font-size: .95rem; flex: 1; }
+  .body { padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 12px; }
   .tag {
     align-self: flex-start;
-    font-size: .8rem;
-    color: var(--muted);
-    border: 1px solid var(--line);
+    background: var(--mint);
+    border: 2px solid var(--ink);
     border-radius: 999px;
-    padding: 2px 10px;
-  }
-  .btn {
-    margin-top: 6px;
-    align-self: flex-start;
-    background: var(--accent);
-    color: var(--accent-ink);
+    padding: 1px 12px;
+    font-size: .85rem;
     font-weight: 700;
-    border-radius: 10px;
-    padding: 9px 18px;
   }
+  .body h2 { margin: 0; font-size: 1.8rem; line-height: 1.25; }
+  .body > p { margin: 0; color: var(--muted); }
 
+  .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 4px 0 6px; }
+  .tip { border-radius: 18px; padding: 14px 16px; border: 2px solid var(--ink); }
+  .tip.how { background: var(--lilac); }
+  .tip.check { background: var(--peach); }
+  .tip h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .tip ul { margin: 0; padding-left: 0; list-style: none; font-size: .92rem; }
+  .tip li { margin: 4px 0; }
+
+  .btn {
+    align-self: flex-start;
+    display: inline-block;
+    background: var(--sun);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 1.3rem;
+    padding: 8px 30px 10px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 0 5px 0 var(--ink);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn:hover { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+  .btn:focus-visible { outline: 3px solid #3b82f6; outline-offset: 4px; }
+
+  /* 준비 중 카드 */
   .soon {
-    border: 2px dashed var(--line);
-    background: transparent;
-    align-items: center;
-    justify-content: center;
+    border: 3px dashed #9fb3d6;
+    border-radius: 28px;
+    padding: 26px;
     text-align: center;
-    min-height: 300px;
-    padding: 24px;
     color: var(--muted);
+    background: rgba(255,255,255,.6);
   }
-  .soon strong { display: block; color: var(--ink); font-size: 1.05rem; margin-bottom: 4px; }
+  .soon strong { display: block; font-family: "Jua", sans-serif; font-weight: 400; font-size: 1.25rem; color: var(--ink); }
 
-  footer { margin-top: 48px; color: var(--muted); font-size: .9rem; }
-  @media (prefers-reduced-motion: reduce) { a.card { transition: none; } a.card:hover { transform: none; } }
+  footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 760px) {
+    .hero { flex-direction: column-reverse; align-items: flex-start; }
+    .hero-art { width: 200px; }
+    .card { grid-template-columns: 1fr; }
+    .thumb { border-right: 0; border-bottom: 3px solid var(--ink); min-height: 190px; }
+    .tips { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bird { animation: none; } .btn { transition: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>바이브코딩으로 만든 게임<br>(지은쌤)</h1>
-    <p>하고 싶은 게임을 골라 바로 시작해 보세요. 게임을 시작하면 카메라 허용 창이 나타날 수 있어요.</p>
+
+  <header class="hero">
+    <div>
+      <h1>바이브코딩으로 만든 게임<small>(지은쌤)</small></h1>
+      <p>하고 싶은 게임을 골라 바로 시작해 보세요!</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 320 240">
+        <g fill="#fff" stroke="#22314f" stroke-width="3" stroke-linejoin="round">
+          <path d="M20 70q0-22 22-22q8-18 30-12q16-16 34 4q22-2 22 22q0 14-14 14H34q-14 0-14-6z" fill="#fff" opacity=".9"/>
+          <path d="M220 40q0-14 14-14q6-12 20-8q12-10 24 4q14 0 14 14q0 10-10 10h-52q-10 0-10-6z" opacity=".9"/>
+        </g>
+        <g class="bird" stroke="#22314f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M118 128C74 92 40 100 18 122c32-4 54 12 94 38z" fill="#fff"/>
+          <path d="M202 128c44-36 78-28 100-6c-32-4-54 12-94 38z" fill="#fff"/>
+          <ellipse cx="160" cy="142" rx="52" ry="40" fill="#fff"/>
+          <path d="M148 176l12 22l12-22z" fill="#fff"/>
+          <circle cx="160" cy="102" r="30" fill="#fff"/>
+          <path d="M150 108h20l-10 14z" fill="#ffb84d"/>
+          <circle cx="148" cy="97" r="3.5" fill="#22314f" stroke="none"/>
+          <circle cx="172" cy="97" r="3.5" fill="#22314f" stroke="none"/>
+          <ellipse cx="139" cy="110" rx="7" ry="4.5" fill="#ffb3c1" stroke="none"/>
+          <ellipse cx="181" cy="110" rx="7" ry="4.5" fill="#ffb3c1" stroke="none"/>
+        </g>
+      </svg>
+    </div>
   </header>
 
-  <main class="grid">
-    <!-- 게임 카드: 새 게임이 생기면 아래 a.card 블록을 복사해서 붙여넣고
+  <main>
+    <!-- 새 게임을 추가할 때: 아래 <article class="card"> 전체를 복사해서 붙여넣고
          href(폴더 이름), 제목, 설명만 바꾸세요. -->
-    <a class="card" href="./galmaegi/">
+    <article class="card">
       <div class="thumb" aria-hidden="true">
-        <svg viewBox="0 0 280 150" preserveAspectRatio="xMidYMax slice">
-          <rect x="20" y="70" width="40" height="80" fill="var(--bld)"/>
-          <rect x="70" y="40" width="46" height="110" fill="var(--bld-dark)"/>
-          <rect x="126" y="85" width="38" height="65" fill="var(--bld)"/>
-          <rect x="174" y="55" width="50" height="95" fill="var(--bld-dark)"/>
-          <rect x="232" y="90" width="36" height="60" fill="var(--bld)"/>
-          <path d="M112 40 q18 -22 36 -4 q18 -18 36 4 q-18 -6 -36 6 q-18 -12 -36 -6z" fill="#fff"/>
+        <svg viewBox="0 0 280 260" preserveAspectRatio="xMidYMax slice">
+          <circle cx="225" cy="52" r="26" fill="#ffd466" stroke="#22314f" stroke-width="3"/>
+          <g stroke="#22314f" stroke-width="3" stroke-linejoin="round">
+            <rect x="14" y="140" width="52" height="130" rx="8" fill="#ffb3c1"/>
+            <rect x="74" y="100" width="60" height="170" rx="8" fill="#c9f0e0"/>
+            <rect x="142" y="150" width="50" height="120" rx="8" fill="#dcd3ff"/>
+            <rect x="200" y="120" width="62" height="150" rx="8" fill="#ffe6d2"/>
+          </g>
+          <g fill="#22314f" opacity=".25">
+            <rect x="28" y="160" width="10" height="10" rx="2"/><rect x="44" y="160" width="10" height="10" rx="2"/>
+            <rect x="28" y="184" width="10" height="10" rx="2"/><rect x="44" y="184" width="10" height="10" rx="2"/>
+            <rect x="90" y="122" width="10" height="10" rx="2"/><rect x="108" y="122" width="10" height="10" rx="2"/>
+            <rect x="90" y="148" width="10" height="10" rx="2"/><rect x="108" y="148" width="10" height="10" rx="2"/>
+            <rect x="216" y="142" width="10" height="10" rx="2"/><rect x="236" y="142" width="10" height="10" rx="2"/>
+          </g>
+          <g stroke="#22314f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M88 62c-18-16-34-14-44-4c14-1 24 6 42 18z" fill="#fff"/>
+            <path d="M112 62c18-16 34-14 44-4c-14-1-24 6-42 18z" fill="#fff"/>
+            <ellipse cx="100" cy="70" rx="18" ry="13" fill="#fff"/>
+            <circle cx="100" cy="55" r="11" fill="#fff"/>
+            <path d="M96 58h8l-4 6z" fill="#ffb84d"/>
+            <circle cx="96" cy="53" r="1.6" fill="#22314f" stroke="none"/>
+            <circle cx="104" cy="53" r="1.6" fill="#22314f" stroke="none"/>
+          </g>
         </svg>
       </div>
-      <div class="body">
-        <span class="tag">웹캠 · 마우스 · 터치</span>
-        <h2>부산 갈매기: 새우깡 사냥</h2>
-        <p>부산 도심 하늘을 나는 갈매기가 되어 60초 동안 새우깡을 모아 보세요. 고개를 기울이고 팔을 펄럭이면 방향이 바뀌고, 웹캠이 없으면 마우스로도 할 수 있어요.</p>
-        <span class="btn">게임 시작</span>
-      </div>
-    </a>
 
-    <div class="card soon">
-      <div>
-        <strong>다음 게임을 준비하고 있어요</strong>
-        새 게임이 생기면 여기에 추가됩니다.
+      <div class="body">
+        <span class="tag">웹캠 필요</span>
+        <h2>부산 갈매기: 새우깡 사냥</h2>
+        <p>부산 도심 하늘을 나는 갈매기가 되어 60초 동안 새우깡을 모아 점수를 쌓아 보세요.</p>
+
+        <div class="tips">
+          <div class="tip how">
+            <h3>🕹️ 게임 방법</h3>
+            <ul>
+              <li>🙆 고개를 기울이면 방향을 바꿔요</li>
+              <li>🖐️ 팔(손)을 펄럭이면 위로 올라가요</li>
+              <li>✊ 주먹을 쥐면 아래로 내려가요</li>
+            </ul>
+          </div>
+          <div class="tip check">
+            <h3>📷 시작하기 전에</h3>
+            <ul>
+              <li>카메라 사용 창이 뜨면 <strong>허용</strong>을 눌러 주세요</li>
+              <li>카메라 앞 40~60cm에 앉아 얼굴과 손이 보이게 해요</li>
+              <li>밝은 곳이 좋고, Zoom 같은 카메라 앱은 닫아 주세요</li>
+              <li>카메라가 없으면 마우스 드래그로 할 수 있어요</li>
+            </ul>
+          </div>
+        </div>
+
+        <a class="btn" href="./galmaegi/">게임 시작</a>
       </div>
+    </article>
+
+    <div class="soon">
+      <strong>다음 게임을 준비하고 있어요</strong>
+      새 게임이 생기면 여기에 추가됩니다.
     </div>
   </main>
 
